@@ -1,9 +1,11 @@
 #!/bin/bash
 
+CONFIG_DIR='config_files'
+
 # copying config files
-cp config_files/.vimrc $HOME
-cp config_files/.zshrc $HOME
-cp config_files/config.fish $HOME/.config/fish
+cp $CONFIG_DIR/.vimrc $HOME
+cp $CONFIG_DIR/.zshrc $HOME
+cp $CONFIG_DIR/config.fish $HOME/.config/fish
 
 # brew
 rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew
