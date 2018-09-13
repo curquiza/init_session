@@ -2,6 +2,10 @@
 
 CONFIG_DIR='config_files'
 
+# configuring zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+cat $CONFIG_DIR/.zshrc >> $HOME/.zshrc
+
 # copying config files
 cp $CONFIG_DIR/.vimrc $HOME
 cp $CONFIG_DIR/.zshrc $HOME
@@ -17,4 +21,3 @@ brew update
 brew install fish
 brew install docker-machine
 brew install htop
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
