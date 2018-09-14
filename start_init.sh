@@ -1,36 +1,55 @@
 #!/bin/bash
 
 CONFIG_DIR='config_files'
-FISH_FILE=$HOME/.config/fish/config.fish
-ZSH_FILE=$HOME/.zshrc
+
 ALIAS_FILE=$CONFIG_DIR/aliases.txt
+ENV_VAR_FILE=$CONFIG_DIR/aliases.txt
+
+FISH_CONFIG=$HOME/.config/fish/config.fish
+ZSH_CONFIG=$HOME/.zshrc
+GIT_CONFIG=$HOME/.gitconfig
 
 # creating Documents folder
 mkdir -p $HOME/Documents/
 
 # installing oh-my-zsh and configuring zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-echo "\nAliases :" >> $ZSH_FILE
-cat $ALIAS_FILE >> $ZSH_FILE && source $ZSH_FILE
+echo "\nAliases :" >> $ZSH_CONFIG
+cat $ALIAS_FILE >> $ZSH_CONFIG
+echo "\nEnv var :" >> $ZSH_CONFIG
+cat $ENV_VAR_FILE >> $ZSH_CONFIG
+source $ZSH_CONFIG
 
-# configuring fish shell
-echo "\nAliases :" >> $FISH_FILE
-cat $ALIAS_FILE >> $FISH_FILE
-sed -i -e 's/=/ /g' $FILE_FILE
+# installing fish shell and configuring
+brew install fish
+# aliases
+echo "\nAliases :" >> $FISH_CONFIG
+cat $ALIAS_FILE >> $FISH_CONFIG
+sed -i -e 's/=/ /g' $FISH_CONFIG
+# env var
+echo "\nEnv var :" >> $FISH_CONFIG
+cat $ENV_VAR_FILE >> $FISH_CONFIG
+sed -i -e 's/=/ /g' $FISH_CONFIG
+sed -i -e 's/export/set -x/g' $FISH_CONFIG
+# clean and run
 rm -f "$FILE_FILE-e"
-source $FISH_FILE
+source $FISH_CONFIG
 
 # configuring vim
 cp $CONFIG_DIR/.vimrc $HOME
 
 # brew
 rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew
-echo "\nBrew env var :" | tee $ZSH_FILE $FISH_FILE
-echo 'export PATH=$HOME/.brew/bin:$PATH' >> $ZSH_FILE && source $ZSH_FILE
-echo 'env PATH=$HOME/.brew/bin:$PATH' >> $FISH_FILE && source $FISH_FILE
+echo "\nBrew env var :" | tee $ZSH_CONFIG $FISH_CONFIG
+echo 'export PATH=$HOME/.brew/bin:$PATH' >> $ZSH_CONFIG && source $ZSH_CONFIG
+echo 'env PATH=$HOME/.brew/bin:$PATH' >> $FISH_CONFIG && source $FISH_CONFIG
 brew update
 
+# git
+cp $CONFIG_DIR/.gitconfig $HOME
+git config --global user.name "curquiza"
+git config --global user.email clementine.urquizar@gmail.com
+
 # installing packages
-brew install fish
 brew install docker-machine
 brew install htop

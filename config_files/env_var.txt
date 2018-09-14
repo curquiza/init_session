@@ -1,0 +1,5 @@
+export EDITOR=vim
+
+# 42
+export USER=curquiza
+export EMAIL=curquiza@student.42.fr
