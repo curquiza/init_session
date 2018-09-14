@@ -2,6 +2,9 @@
 
 CONFIG_DIR='config_files'
 
+# creating Documents folder
+mkdir -p $HOME/Documents/
+
 # configuring zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 cat $CONFIG_DIR/.zshrc >> $HOME/.zshrc
