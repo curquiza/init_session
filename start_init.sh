@@ -12,13 +12,21 @@ GIT_CONFIG=$HOME/.gitconfig
 # creating Documents folder
 mkdir -p $HOME/Documents/
 
-# installing oh-my-zsh and configuring zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# installing oh-my-zsh
+#sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# configuring zsh
 echo "\nAliases :" >> $ZSH_CONFIG
 cat $ALIAS_FILE >> $ZSH_CONFIG
 echo "\nEnv var :" >> $ZSH_CONFIG
 cat $ENV_VAR_FILE >> $ZSH_CONFIG
 source $ZSH_CONFIG
+
+# brew
+rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew
+echo "\nBrew env var :" | tee $ZSH_CONFIG $FISH_CONFIG
+echo 'export PATH=$HOME/.brew/bin:$PATH' >> $ZSH_CONFIG && source $ZSH_CONFIG
+echo 'env PATH=$HOME/.brew/bin:$PATH' >> $FISH_CONFIG && source $FISH_CONFIG
+brew update
 
 # installing fish shell and configuring
 brew install fish
@@ -35,15 +43,8 @@ sed -i -e 's/export/set -x/g' $FISH_CONFIG
 rm -f "$FILE_FILE-e"
 source $FISH_CONFIG
 
-# configuring vim
+# vim
 cp $CONFIG_DIR/.vimrc $HOME
-
-# brew
-rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew
-echo "\nBrew env var :" | tee $ZSH_CONFIG $FISH_CONFIG
-echo 'export PATH=$HOME/.brew/bin:$PATH' >> $ZSH_CONFIG && source $ZSH_CONFIG
-echo 'env PATH=$HOME/.brew/bin:$PATH' >> $FISH_CONFIG && source $FISH_CONFIG
-brew update
 
 # git
 cp $CONFIG_DIR/.gitconfig $HOME
