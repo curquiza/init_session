@@ -45,7 +45,7 @@ put_done
 
 ## vim
 put_title 'Configuring vim'
-quiet_cmd 'curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+quiet_cmd "curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 cp $CONFIG_DIR/.vimrc $HOME
 put_done
 
@@ -69,8 +69,8 @@ put_subtitle 'Updating' && quiet_cmd "$HOME/.brew/bin/brew update" && put_done
 
 ## installing packages
 echo "Installing other packages :"
-put_subtitle 'docker-machine' && quiet_cmd 'brew install docker-machine' && put_done
-put_subtitle 'htop' && quiet_cmd 'brew install htop' && put_done
+put_subtitle 'docker-machine' ; quiet_cmd 'brew install docker-machine' ; put_done
+put_subtitle 'htop' ; quiet_cmd 'brew install htop' ; put_done
 
 ## installing fish shell
 echo "Fish shell :"
