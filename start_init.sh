@@ -32,6 +32,8 @@ echo "$GREEN""OK$DEF"
 
 # vim
 printf "Configuring vim... "
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 cp $CONFIG_DIR/.vimrc $HOME
 echo "$GREEN""OK$DEF"
 

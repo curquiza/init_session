@@ -1,4 +1,22 @@
-"------- PERSO -------
+" ------- VIM-PLUG -------
+
+call plug#begin('~/.vim/plugged')
+
+" Align part of code with = or ,
+Plug 'junegunn/vim-easy-align'
+
+" NERDTree
+Plug 'scrooloose/nerdtree'
+
+" Vim colorschemes
+Plug 'flazz/vim-colorschemes'
+" Hightlight syntax for multiple langages
+Plug 'sheerun/vim-polyglot'
+
+" Initialize plugin system
+call plug#end()
+
+" ------- PERSO -------
 
 set relativenumber
 set number
@@ -6,7 +24,6 @@ set colorcolumn=81
 
 colorscheme Tomorrow-Night
 
-inoremap #ii #include<space>
 inoremap return return<space>();<left><left>
 inoremap ret0 return<space>(0);
 inoremap ret1 return<space>(1);
@@ -17,21 +34,21 @@ inoremap /** /*<esc>o<esc>i**<return>*/<return><up><up><right><right><space>
 inoremap (( ()<left>
 inoremap ((; ();<left><left>
 inoremap ((; ();<left><left>
-inoremap << <><left>
 inoremap [[ []<left>
 inoremap "" ""<left>
 inoremap '' ''<left>
 inoremap {{ {<return>}<up><return>
 
-"enlève l'insertion automatique des commentaires lors des retours à la ligne
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" remove automatically comment when new line
+"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 set tabstop=4
 set shiftwidth=4
-"set expandtab
 
+" Open NERDTree when opening file
+autocmd vimenter * NERDTree
 
-"------- VIMTUTOR ------
+" ------- VIMTUTOR ------
 
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
 " Last change:	2008 Dec 17
