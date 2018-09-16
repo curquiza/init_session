@@ -18,6 +18,10 @@ call plug#end()
 
 " ------- PERSO -------
 
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
 set relativenumber
 set number
 set colorcolumn=81
@@ -54,8 +58,12 @@ nnoremap <silent> <S-Down> <c-w><down>
 nnoremap <silent> <S-Left> <c-w><left>
 nnoremap <silent> <S-Right> <c-w><right>
 
+" CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
 " remove automatically comment when new line
-"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Tabulation
 set tabstop=4
@@ -80,34 +88,17 @@ if v:progname =~? "evim"
   finish
 endif
 
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-
-"COMMENTED BECAUSE OF TILDE FILES GENERATION
-"if has("vms")
-"  set nobackup		" do not keep a backup file, use versions instead
-"else
-"  set backup		" keep a backup file
-"endif
 
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
-
 " Don't use Ex mode, use Q for formatting
 map Q gq
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
