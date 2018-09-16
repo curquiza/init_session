@@ -39,9 +39,25 @@ inoremap "" ""<left>
 inoremap '' ''<left>
 inoremap {{ {<return>}<up><return>
 
+" Select the current word
+nnoremap <space> viw
+" Delete the current word and pass in insert mode
+nnoremap <space><space> viwd<esc>i
+" Current word in uppercase
+noremap <c-u> viwU
+" Move the line up and down
+nnoremap - dd<up><up>p
+nnoremap + ddp
+" Map switching of window with shift + arrow
+nnoremap <silent> <S-Up> <c-w><up>
+nnoremap <silent> <S-Down> <c-w><down>
+nnoremap <silent> <S-Left> <c-w><left>
+nnoremap <silent> <S-Right> <c-w><right>
+
 " remove automatically comment when new line
 "autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" Tabulation
 set tabstop=4
 set shiftwidth=4
 
