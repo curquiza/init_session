@@ -25,6 +25,7 @@ set nocompatible
 set relativenumber
 set number
 set colorcolumn=81
+set wildmenu
 
 colorscheme Tomorrow-Night
 
