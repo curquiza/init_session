@@ -32,7 +32,7 @@ put_subtitle 'Creating ~/.config' && mkdir -p $HOME/.config && put_done
 ## installing oh-my-zsh
 echo "Zsh :"
 put_subtitle 'Installing oh-my-zsh'
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh .*$::g' | sed 's:chsh -s .*$::g')" >> $TRACE_FILE 2>&1 
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh .*$::g' | sed 's:chsh -s .*$::g')" >> $TRACE_FILE 2>&1
 put_done
 
 ## configuring zsh
