@@ -63,9 +63,10 @@ put_subtitle 'Installing'
 rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew >> trace.txt 2>&1
 echo "\n# Brew env var :\nexport PATH=$HOME/.brew/bin:$PATH" >> $ZSH_CONFIG
 mkdir -p $HOME/.config/fish && echo "\n# Brew env var :\nset PATH $HOME/.brew/bin \$PATH" >> $FISH_CONFIG
+quiet_cmd "source $ZSH_CONFIG"
 put_done
 # update
-put_subtitle 'Updating' && quiet_cmd "$HOME/.brew/bin/brew update" && put_done
+put_subtitle 'Updating' && quiet_cmd 'brew update' && put_done
 
 ## installing packages
 echo "Installing other packages :"
