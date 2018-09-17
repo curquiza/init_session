@@ -13,16 +13,6 @@ Plug 'flazz/vim-colorschemes'
 " Hightlight syntax for multiple langages
 Plug 'sheerun/vim-polyglot'
 
-" Status bar (bottom)
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Current branch on status bar
-Plug 'tpope/vim-fugitive'
-" Side bar git (+/-/~)
-Plug 'airblade/vim-gitgutter'
-
-
-
 " Initialize plugin system
 call plug#end()
 
@@ -38,7 +28,6 @@ set colorcolumn=81
 set wildmenu
 
 colorscheme Tomorrow-Night
-let g:airline_theme='bubblegum'
 
 inoremap return return<space>();<left><left>
 inoremap ret0 return<space>(0);
@@ -70,9 +59,6 @@ nnoremap <silent> <S-Down> <c-w><down>
 nnoremap <silent> <S-Left> <c-w><left>
 nnoremap <silent> <S-Right> <c-w><right>
 
-" NERDTree open/close
-nnoremap <c-c> :NERDTreeToggle<CR>
-
 " CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
@@ -85,7 +71,7 @@ set tabstop=4
 set shiftwidth=4
 
 " Open NERDTree when opening file
-"autocmd vimenter * NERDTree
+autocmd vimenter * NERDTree
 
 " ------- VIMTUTOR ------
 
