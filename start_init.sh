@@ -79,9 +79,13 @@ echo "Fish shell :"
 put_subtitle 'Installing' && quiet_cmd 'brew install fish' && put_done
 
 ## configuring fish shell
-# aliases
 put_subtitle 'Configuring'
 mkdir -p $HOME/.config/fish
+mkdir -p $HOME/.config/fish/functions
+# custom prompt functions
+cp $CONFIG_DIR/functions/fish_prompt.fish $HOME/.config/fish
+cp $CONFIG_DIR/functions/fish_right_prompt.fish $HOME/.config/fish
+# aliases
 echo "\n# Aliases :" >> $FISH_CONFIG
 cat $ALIAS_FILE >> $FISH_CONFIG
 sed -i -e 's/=/ /g' $FISH_CONFIG
@@ -92,6 +96,4 @@ sed -i -e 's/=/ /g' $FISH_CONFIG
 sed -i -e 's/export/set -x/g' $FISH_CONFIG
 # clean
 rm -f "$FISH_CONFIG""-e"
-# add main config.fish
-echo "" >> $FISH_CONFIG && cat $CONFIG_DIR/config.fish >> $FISH_CONFIG
 put_done
