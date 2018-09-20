@@ -71,6 +71,7 @@ put_subtitle 'Updating' && quiet_cmd 'brew update' && put_done
 ## installing packages
 echo "Installing other packages :"
 put_subtitle 'docker-machine' ; quiet_cmd 'brew install docker-machine' ; put_done
+put_subtitle 'docker' ; quiet_cmd 'brew install docker' ; put_done
 put_subtitle 'htop' ; quiet_cmd 'brew install htop' ; put_done
 
 ## installing fish shell
