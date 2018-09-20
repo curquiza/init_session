@@ -92,4 +92,6 @@ sed -i -e 's/=/ /g' $FISH_CONFIG
 sed -i -e 's/export/set -x/g' $FISH_CONFIG
 # clean
 rm -f "$FISH_CONFIG""-e"
+# add main config.fish
+echo "" >> $FISH_CONFIG && cat $CONFIG_DIR/config.fish >> $FISH_CONFIG
 put_done
