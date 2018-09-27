@@ -83,8 +83,8 @@ put_subtitle 'Configuring'
 mkdir -p $HOME/.config/fish
 mkdir -p $HOME/.config/fish/functions
 # custom prompt functions
-cp $CONFIG_DIR/functions/fish_prompt.fish $HOME/.config/fish
-cp $CONFIG_DIR/functions/fish_right_prompt.fish $HOME/.config/fish
+cp $CONFIG_DIR/functions/fish_prompt.fish $HOME/.config/fish/functions
+cp $CONFIG_DIR/functions/fish_right_prompt.fish $HOME/.config/fish/functions
 # aliases
 echo "\n# Aliases :" >> $FISH_CONFIG
 cat $ALIAS_FILE >> $FISH_CONFIG
