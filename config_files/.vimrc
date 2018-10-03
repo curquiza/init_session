@@ -21,8 +21,6 @@ Plug 'tpope/vim-fugitive'
 " Side bar git (+/-/~)
 Plug 'airblade/vim-gitgutter'
 
-
-
 " Initialize plugin system
 call plug#end()
 
@@ -83,6 +81,11 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Tabulation
 set tabstop=4
 set shiftwidth=4
+
+" Invisibles chars
+set showbreak=↪
+set listchars=eol:.,tab:+-,trail:~
+set list
 
 " Open NERDTree when opening file
 "autocmd vimenter * NERDTree
