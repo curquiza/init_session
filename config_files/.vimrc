@@ -4,7 +4,10 @@
 call plug#begin('~/.vim/plugged')
 
 " Align part of code with = or ,
-Plug 'junegunn/vim-easy-align'
+"Plug 'junegunn/vim-easy-align'
+
+" Multiple cursor
+Plug 'terryma/vim-multiple-cursors'
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
@@ -21,6 +24,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 " Side bar git (+/-/~)
 Plug 'airblade/vim-gitgutter'
+
+" FuzzyFinder
+"Plug 'junegunn/fzf.vim'
+
+" Easy comment
+Plug 'scrooloose/nerdcommenter'
 
 " Initialize plugin system
 call plug#end()
@@ -96,8 +105,11 @@ nnoremap <silent> <S-Left> <c-w><left>
 nnoremap <silent> <S-Right> <c-w><right>
 
 " NERDTree open/close
-nnoremap <c-c> :NERDTreeToggle<CR>
+nnoremap <C-O> :NERDTreeToggle<CR>
 
 " CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
+
+" Switch off highlight searching
+nnoremap <silent> <C-H> :nohlsearch <CR>
