@@ -31,6 +31,10 @@ Plug 'airblade/vim-gitgutter'
 " Easy comment
 Plug 'scrooloose/nerdcommenter'
 
+" Easy surround
+Plug 'tpope/vim-surround'
+
+
 " Initialize plugin system
 call plug#end()
 

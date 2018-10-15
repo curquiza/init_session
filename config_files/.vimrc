@@ -26,14 +26,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " FuzzyFinder
-"Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
 
 " Easy comment
 Plug 'scrooloose/nerdcommenter'
 
 " Easy surround
 Plug 'tpope/vim-surround'
-
 
 " Initialize plugin system
 call plug#end()
@@ -117,3 +116,8 @@ inoremap <C-U> <C-G>u<C-U>
 
 " Switch off highlight searching
 nnoremap <silent> <C-H> :nohlsearch <CR>
+
+" FuzzyFinder
+nnoremap <leader>FF :FZF<space>
+nnoremap <leader>ff :FZF<CR>
+nnoremap <leader>fd :FZF ~/Documents<CR>
