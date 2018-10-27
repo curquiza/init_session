@@ -4,3 +4,6 @@
 	st = status
 	br = branch
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+[user]
+	name = curquiza
+	email = clementine.urquizar@gmail.com

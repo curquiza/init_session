@@ -52,8 +52,6 @@ put_done
 ## git
 put_title 'Configuring git'
 cp $CONFIG_DIR/.gitconfig $HOME
-git config --global user.name "curquiza"
-git config --global user.email clementine.urquizar@gmail.com
 put_done
 
 ## brew
