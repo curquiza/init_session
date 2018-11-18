@@ -100,8 +100,6 @@ inoremap "" ""<left>
 inoremap '' ''<left>
 inoremap {{ {<return>}<up><return>
 
-" Select the current word
-"nnoremap <space> viw
 " Delete the current word and pass in insert mode
 nnoremap <space><space> ciw
 " Current word in uppercase
@@ -109,6 +107,9 @@ noremap <c-u> viwU
 " Move the line up and down
 nnoremap - dd<up><up>p
 nnoremap + ddp
+
+" remap <esc>
+inoremap jj <esc>
 
 " Map switching of window with shift + arrow
 nnoremap <silent> <S-Up> <c-w><up>
