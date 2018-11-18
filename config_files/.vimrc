@@ -3,14 +3,11 @@
 
 call plug#begin('~/.vim/plugged')
 
-" Align part of code with = or ,
-"Plug 'junegunn/vim-easy-align'
-
-" Multiple cursor
-Plug 'terryma/vim-multiple-cursors'
-
 " NERDTree
 Plug 'scrooloose/nerdtree'
+
+" FuzzyFinder
+Plug 'junegunn/fzf'
 
 " Vim colorschemes
 Plug 'flazz/vim-colorschemes'
@@ -20,19 +17,31 @@ Plug 'sheerun/vim-polyglot'
 " Status bar (bottom)
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
 " Current branch on status bar
 Plug 'tpope/vim-fugitive'
 " Side bar git (+/-/~)
 Plug 'airblade/vim-gitgutter'
 
-" FuzzyFinder
-Plug 'junegunn/fzf'
-
 " Easy comment
 Plug 'scrooloose/nerdcommenter'
 
+" Multiple cursor (/!\ freezes sometimes)
+Plug 'terryma/vim-multiple-cursors'
+
+" Buffers
+Plug 'ap/vim-buftabline'
+Plug 'corntrace/bufexplorer'
+
 " Easy surround
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
+
+" Align part of code with = or ,
+"Plug 'junegunn/vim-easy-align'
+
+" Tabnine = autocompletion multi language
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'zxqfl/tabnine-vim'
 
 " Initialize plugin system
 call plug#end()
@@ -92,9 +101,9 @@ inoremap '' ''<left>
 inoremap {{ {<return>}<up><return>
 
 " Select the current word
-nnoremap <space> viw
+"nnoremap <space> viw
 " Delete the current word and pass in insert mode
-nnoremap <space><space> viwd<esc>i
+nnoremap <space><space> ciw
 " Current word in uppercase
 noremap <c-u> viwU
 " Move the line up and down
@@ -121,3 +130,7 @@ nnoremap <silent> <C-H> :nohlsearch <CR>
 nnoremap <leader>FF :FZF<space>
 nnoremap <leader>ff :FZF<CR>
 nnoremap <leader>fd :FZF ~/Documents<CR>
+
+" Move between buffers
+nnoremap <leader><Left> :bprev<CR>
+nnoremap <leader><Right> :bnext<CR>
