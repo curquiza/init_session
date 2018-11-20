@@ -105,7 +105,7 @@ inoremap {{ {<return>}<up><return>
 " Delete the current word and pass in insert mode
 nnoremap <space><space> ciw
 " Current word in uppercase
-noremap <c-u> viwU
+"noremap <c-u> viwU
 " Move the line up and down
 nnoremap - dd<up><up>p
 nnoremap + ddp
@@ -121,7 +121,7 @@ nnoremap <C-O> :NERDTreeToggle<CR>
 
 " CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
-"inoremap <C-U> <C-G>u<C-U>
+inoremap <C-U> <C-G>u<C-U>
 
 " Switch off highlight searching
 nnoremap <silent> <C-H> :nohlsearch <CR>
