@@ -88,6 +88,8 @@ autocmd BufReadPost *
   \   exe "normal! g`\"" |
   \ endif
 
+" FZF ignores files in gitignore
+"let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " ---- MAPPING -----------------------------------------------------------------
 
@@ -109,6 +111,9 @@ nnoremap <space><space> ciw
 " Move the line up and down
 nnoremap - dd<up><up>p
 nnoremap + ddp
+
+" Easy escape
+inoremap jj <esc>
 
 " Map switching of window with shift + arrow
 nnoremap <silent> <S-Up> <c-w><up>
@@ -132,5 +137,5 @@ nnoremap <leader>ff :FZF<CR>
 nnoremap <leader>fd :FZF ~/Documents<CR>
 
 " Move between buffers
-nnoremap <leader><Left> :bprev<CR>
-nnoremap <leader><Right> :bnext<CR>
+nnoremap <C-J> :bprev<CR>
+nnoremap <C-K> :bnext<CR>
