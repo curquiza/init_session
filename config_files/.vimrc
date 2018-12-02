@@ -109,8 +109,8 @@ nnoremap <space><space> ciw
 " Current word in uppercase
 "noremap <c-u> viwU
 " Move the line up and down
-nnoremap - dd<up><up>p
-nnoremap + ddp
+"nnoremap - dd<up><up>p
+"nnoremap + ddp
 
 " Easy escape
 inoremap jj <esc>
@@ -139,3 +139,7 @@ nnoremap <leader>fd :FZF ~/Documents<CR>
 " Move between buffers
 nnoremap <C-J> :bprev<CR>
 nnoremap <C-K> :bnext<CR>
+
+" Resize window
+nnoremap ˘ <C-w>> "Alt + >
+nnoremap ¯ <C-w>< "Alt + <
