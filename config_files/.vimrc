@@ -11,7 +11,7 @@ Plug 'junegunn/fzf'
 
 " Vim colorschemes
 Plug 'flazz/vim-colorschemes'
-" Hightlight syntax for multiple langages
+" Hightlight and indent syntax for multiple langages
 Plug 'sheerun/vim-polyglot'
 
 " Status bar (bottom)
@@ -39,9 +39,24 @@ Plug 'corntrace/bufexplorer'
 " Align part of code with = or ,
 "Plug 'junegunn/vim-easy-align'
 
-" Tabnine = autocompletion multi language
+" YCM : Autocompletion
+" 1) Vim should be compiled with python3 (reinstall and link vim)
+" 2) git submodule update --init --recursive in the YouCompleteMe repo
+" 3) Then install all packages needed for each file extansion (c.f doc of YCM)
+"    ex : ./install.py --clang-completer (for C and C++)
+" 4) fill flag manually
+"    ex : def Settings( **kwargs ):
+"             return { 'flags': [ '-x', 'c++', '-Wall', '-Wextra', '-Werror' ] }
+"    doc : https://github.com/Valloric/YouCompleteMe#option-2-provide-the-flags-manually
 "Plug 'Valloric/YouCompleteMe'
-"Plug 'zxqfl/tabnine-vim'
+
+" Tabnine : Autocompletion with machine learning
+" type TabNine::sem/TabNine:no_sem to enable/disable semantic completion
+" For semantic in C : follow the end of this doc (https://tabnine.com/semantic) -> use ccls instead of cquery
+Plug 'zxqfl/tabnine-vim'
+
+" ALE : Asynchronous Lint Engine
+Plug 'w0rp/ale'
 
 " Initialize plugin system
 call plug#end()
@@ -90,6 +105,22 @@ autocmd BufReadPost *
 
 " FZF ignores files in gitignore
 "let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" YCM
+" always load config file
+"let g:ycm_confirm_extra_conf = 0
+" path of config file
+"let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+" TabNine
+set rtp+=~/tabnine-vim
+
+" ALE
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+"let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
+let g:ale_c_parse_makefile = 1
 
 " ---- MAPPING -----------------------------------------------------------------
 
