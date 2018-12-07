@@ -53,7 +53,7 @@ Plug 'corntrace/bufexplorer'
 " Tabnine : Autocompletion with machine learning
 " type TabNine::sem/TabNine:no_sem to enable/disable semantic completion
 " For semantic in C : follow the end of this doc (https://tabnine.com/semantic) -> use ccls instead of cquery
-Plug 'zxqfl/tabnine-vim'
+"Plug 'zxqfl/tabnine-vim'
 
 " ALE : Asynchronous Lint Engine
 Plug 'w0rp/ale'
@@ -104,7 +104,7 @@ autocmd BufReadPost *
   \ endif
 
 " FZF ignores files in gitignore
-"let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+"let $FZF_DEFAULT_COMMAND="git ls-tree -r --name-only HEAD || $FZF_INITIAL_COMMAND"
 
 " YCM
 " always load config file
