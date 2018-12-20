@@ -55,21 +55,21 @@ cp $CONFIG_DIR/.gitconfig $HOME
 put_done
 
 ## brew
-echo "Brew :"
 # install
-#put_subtitle 'Installing'
-#rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew >> trace.txt 2>&1
-#echo "\n# Brew env var :\nexport PATH=$HOME/.brew/bin:$PATH" >> $ZSH_CONFIG
-#mkdir -p $HOME/.config/fish && echo "\n# Brew env var :\nset PATH $HOME/.brew/bin \$PATH" >> $FISH_CONFIG
-#quiet_cmd "source $ZSH_CONFIG"
-#put_done
+echo "Brew :"
+put_subtitle 'Installing'
+rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew >> trace.txt 2>&1
+echo "\n# Brew env var :\nexport PATH=$HOME/.brew/bin:$PATH" >> $ZSH_CONFIG
+mkdir -p $HOME/.config/fish && echo "\n# Brew env var :\nset PATH $HOME/.brew/bin \$PATH" >> $FISH_CONFIG
+quiet_cmd "source $ZSH_CONFIG"
+put_done
 # update
 put_subtitle 'Updating' && quiet_cmd 'brew update' && put_done
 
 ## installing packages
 echo "Installing other packages :"
-#put_subtitle 'docker-machine' ; quiet_cmd 'brew install docker-machine' ; put_done
-#put_subtitle 'docker' ; quiet_cmd 'brew install docker' ; put_done
+put_subtitle 'docker-machine' ; quiet_cmd 'brew install docker-machine' ; put_done
+put_subtitle 'docker' ; quiet_cmd 'brew install docker' ; put_done
 put_subtitle 'htop' ; quiet_cmd 'brew install htop' ; put_done
 
 ## installing fish shell
