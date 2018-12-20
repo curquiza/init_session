@@ -9,7 +9,7 @@ Quick way to initialize your session for :
 
 ## Installation
 ``` bash
-git clone https://github.com/curquiza/init_42_session.git
+git clone git@github.com:curquiza/init_session.git
 cd init_42_session
 sh start_init.sh
 ```
