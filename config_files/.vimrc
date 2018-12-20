@@ -36,9 +36,6 @@ Plug 'corntrace/bufexplorer'
 " Easy surround
 "Plug 'tpope/vim-surround'
 
-" Align part of code with = or ,
-"Plug 'junegunn/vim-easy-align'
-
 " YCM : Autocompletion
 " 1) Vim should be compiled with python3 (reinstall and link vim)
 " 2) git submodule update --init --recursive in the YouCompleteMe repo
@@ -55,14 +52,17 @@ Plug 'corntrace/bufexplorer'
 " For semantic in C : follow the end of this doc (https://tabnine.com/semantic) -> use ccls instead of cquery
 "Plug 'zxqfl/tabnine-vim'
 
+" VueJS
+"Plug 'posva/vim-vue'
+
 " ALE : Asynchronous Lint Engine
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 
 " Initialize plugin system
 call plug#end()
 
 
-" ---- BASICS ------------------------------------------------------------------
+" ---- SETTINGS ----------------------------------------------------------------
 
 set nocompatible	" use Vim rathen than Vi settings
 
@@ -74,7 +74,7 @@ set number
 set showcmd			" display incomplete commands
 set wildmenu		" completion when typing command
 set history=100
-set colorcolumn=81
+autocmd FileType c set colorcolumn=81
 set hlsearch
 
 " Allow backspacing over everything in insert mode
@@ -88,23 +88,26 @@ let g:airline_theme='bubblegum'
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Indent
-set tabstop=4
-set shiftwidth=4
+"set tabstop=4
+"set shiftwidth=4
 autocmd FileType ocaml setlocal shiftwidth=2 tabstop=2 textwidth=0 " ocaml
+autocmd FileType vue setlocal expandtab shiftwidth=2 softtabstop=2 " vuejs
 
 " Invisible chars
 set showbreak=↪
-set listchars=eol:.,tab:+-,trail:~
+"set listchars=eol:.,tab:+-,trail:~
+set listchars=tab:+-,trail:~
 set list
 
 " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
+			\ if line("'\"") > 1 && line("'\"") <= line("$") |
+			\   exe "normal! g`\"" |
+			\ endif
 
 " FZF ignores files in gitignore
-"let $FZF_DEFAULT_COMMAND="git ls-tree -r --name-only HEAD || $FZF_INITIAL_COMMAND"
+let $FZF_DEFAULT_COMMAND="git ls-tree -r --name-only HEAD || $FZF_INITIAL_COMMAND"
+set rtp+=/Users/curquiza/.brew/opt/fzf
 
 " YCM
 " always load config file
@@ -122,26 +125,25 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_sign_column_always = 1
 let g:ale_c_parse_makefile = 1
 
+" NERDTree
+let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.swp$']
+
+" Vuejs highlight
+autocmd FileType vue syntax sync fromstart
+let g:vue_disable_pre_processors=1
+
 " ---- MAPPING -----------------------------------------------------------------
 
 inoremap ret; return<space>();<left><left>
-inoremap /** /*<esc>o<esc>i**<return>*/<return><up><up><right><right><space>
 inoremap (( ()<left>
 inoremap ((; ();<left><left>
 inoremap [[ []<left>
 inoremap "" ""<left>
 inoremap '' ''<left>
-inoremap {{ {<return>}<up><return>
-
-" Select the current word
-"nnoremap <space> viw
-" Delete the current word and pass in insert mode
-nnoremap <space><space> ciw
-" Current word in uppercase
-"noremap <c-u> viwU
-" Move the line up and down
-"nnoremap - dd<up><up>p
-"nnoremap + ddp
+inoremap {{ {  }<left><left>
+autocmd FileType c inoremap /** /*<esc>o<esc>i**<return>*/<return><up><up><right><right><space>
+autocmd FileType c inoremap {{ {<return>}<up><return>
 
 " Easy escape
 inoremap jj <esc>
