@@ -1,7 +1,7 @@
 # Session initialization
 
 Quick way to initialize your session for :
-- vim
+- neovim
 - git
 - brew
 - shell (zsh and fish)
@@ -14,7 +14,6 @@ cd init_42_session
 sh start_init.sh
 ```
 #### 42 session
-Use `sh start_init_42.sh` instead.
 Brew will be installed in home directory.
 
 ## Vim 
