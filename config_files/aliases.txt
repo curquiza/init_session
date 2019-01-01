@@ -1,6 +1,9 @@
 alias l='ls -lGa'
 alias ll='ls -lG'
 
+alias vim='nvim'
+alias vi='nvim'
+
 alias openzshrc='vim ~/.zshrc'
 alias openfishconfig='vim ~/.config/fish/config.fish'
 alias opennvimconfig='vim ~/.config/nvim/init.vim'
