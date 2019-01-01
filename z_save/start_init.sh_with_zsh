@@ -13,6 +13,7 @@ NVIM_CONFIG_PATH=$HOME/.config/nvim
 
 FISH_CONFIG=$HOME/.config/fish/config.fish
 NEOVIM_CONFIG=$NVIM_CONFIG_PATH/init.vim
+ZSH_CONFIG=$HOME/.zshrc
 GIT_CONFIG=$HOME/.gitconfig
 
 function put_title() { printf "%s\n" "$1"; }
@@ -42,6 +43,9 @@ fi
 printf "\n"
 
 # save old configs if exist
+if [[ -f "$ZSH_CONFIG" ]]; then
+    mv "$ZSH_CONFIG" "$ZSH_CONFIG""_old"
+fi
 if [[ -f "$FISH_CONFIG" ]]; then
     mv "$FISH_CONFIG" "$FISH_CONFIG""_old"
 fi
@@ -56,6 +60,20 @@ fi
 put_title 'Usefull folders :'
 put_subtitle 'Creating ~/Documents' &&  mkdir -p "$HOME/Documents" && put_done
 put_subtitle 'Creating ~/.config' && mkdir -p "$HOME/.config" && put_done
+
+## Zsh configuration
+# installing oh-my-zsh
+put_title "Zsh"
+put_subtitle 'Installing oh-my-zsh' \
+    && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh .*$::g' | sed 's:chsh -s .*$::g')" >> $TRACE_FILE 2>&1 \
+    && put_done
+# configuring zsh
+put_subtitle 'Configuring' \
+    && echo "\n# Aliases :" >> "$ZSH_CONFIG" \
+    && cat "$ALIAS_FILE" >> "$ZSH_CONFIG" \
+    && echo "\n# Env var :" >> "$ZSH_CONFIG" \
+    && cat "$ENV_VAR_FILE" >> "$ZSH_CONFIG" \
+    && put_done
 
 ## nvim
 put_title 'Neovim'
@@ -82,8 +100,10 @@ put_title "Brew"
 if [[ "$session" == "42" ]]; then
     put_subtitle 'Installing' \
         && rm -rf "$HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew" "$HOME/.brew" >> "$TRACE_FILE" 2>&1 \
+        && echo "\n# Brew env var :\nexport PATH=$HOME/.brew/bin:$PATH" >> "$ZSH_CONFIG" \
         && mkdir -p "$HOME/.config/fish" \
         && echo "\n# Brew env var :\nset PATH $HOME/.brew/bin \$PATH" >> "$FISH_CONFIG" \
+        && quiet_cmd "source $ZSH_CONFIG" \
         && put_done
 fi
 # update
