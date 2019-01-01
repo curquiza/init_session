@@ -86,9 +86,9 @@ endif
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Indent
-"set expandtab
-"set tabstop=4
-"set shiftwidth=4
+set expandtab
+set tabstop=4
+set shiftwidth=4
 autocmd BufNewFile,BufRead *.h set ft=c
 autocmd FileType vim        setlocal expandtab shiftwidth=2 softtabstop=2          " vim
 autocmd FileType c          setlocal noexpandtab shiftwidth=4 tabstop=4            " c
