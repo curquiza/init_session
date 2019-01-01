@@ -3,7 +3,7 @@ alias ll='ls -lG'
 
 alias openzshrc='vim ~/.zshrc'
 alias openfishconfig='vim ~/.config/fish/config.fish'
-alias openvimrc='vim ~/.vimrc'
+alias opennvimconfig='vim ~/.config/nvim/init.vim'
 alias opengitconfig='vim ~/.gitconfig'
 
 alias gccw='gcc -Wall -Wextra -Werror'

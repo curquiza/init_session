@@ -9,14 +9,12 @@ Plug 'scrooloose/nerdtree'
 " FuzzyFinder
 Plug 'junegunn/fzf'
 
+" Status bar (bottom)
+Plug 'itchyny/lightline.vim'
 " Vim colorschemes
-Plug 'flazz/vim-colorschemes'
+Plug 'drewtempelmeyer/palenight.vim'
 " Hightlight and indent syntax for multiple langages
 Plug 'sheerun/vim-polyglot'
-
-" Status bar (bottom)
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 " Current branch on status bar
 Plug 'tpope/vim-fugitive'
@@ -26,18 +24,18 @@ Plug 'airblade/vim-gitgutter'
 " Easy comment
 Plug 'scrooloose/nerdcommenter'
 
-" Multiple cursor (/!\ freezes sometimes)
-Plug 'terryma/vim-multiple-cursors'
+" Multiple cursor (/!\ not stable)
+"Plug 'terryma/vim-multiple-cursors'
 
 " Buffers
 Plug 'ap/vim-buftabline'
 Plug 'corntrace/bufexplorer'
 
+" HTML tag matching
+Plug 'gregsexton/MatchTag'
+
 " Easy surround
 "Plug 'tpope/vim-surround'
-
-" Align part of code with = or ,
-"Plug 'junegunn/vim-easy-align'
 
 " YCM : Autocompletion
 " 1) Vim should be compiled with python3 (reinstall and link vim)
@@ -62,39 +60,48 @@ Plug 'w0rp/ale'
 call plug#end()
 
 
-" ---- BASICS ------------------------------------------------------------------
+" ---- SETTINGS ----------------------------------------------------------------
 
-set nocompatible	" use Vim rathen than Vi settings
-
-set ruler			" show the cursor position all the time
+set nocompatible                      " use Vim rathen than Vi settings
+set ruler                             " show the cursor position all the time
 set mouse=a
-
 set relativenumber
 set number
-set showcmd			" display incomplete commands
-set wildmenu		" completion when typing command
+set showcmd                           " display incomplete commands
+set wildmenu                          " completion when typing command
 set history=100
-set colorcolumn=81
+autocmd FileType c set colorcolumn=81 " highlight column for 42 project in C
 set hlsearch
+set backspace=indent,eol,start        " allow backspacing over everything in insert mode
 
-" Allow backspacing over everything in insert mode
-set backspace=indent,eol,start
+" Color schemes
+set background=dark
+colorscheme palenight
+let g:lightline = { 'colorscheme': 'palenight' }
+if (has("termguicolors"))
+  set termguicolors
+endif
 
-" Themes
-colorscheme Tomorrow-Night
-let g:airline_theme='bubblegum'
-
-" remove automatically comment char when new line
+" Remove automatically comment char when new line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Indent
+set expandtab
 set tabstop=4
 set shiftwidth=4
-autocmd FileType ocaml setlocal shiftwidth=2 tabstop=2 textwidth=0 " ocaml
+autocmd BufNewFile,BufRead *.h set ft=c
+autocmd FileType vim        setlocal expandtab shiftwidth=2 softtabstop=2          " vim
+autocmd FileType c          setlocal noexpandtab shiftwidth=4 tabstop=4            " c
+autocmd FileType ocaml      setlocal expandtab shiftwidth=2 tabstop=2 textwidth=0  " ocaml
+autocmd FileType vue        setlocal expandtab shiftwidth=2 softtabstop=2          " vuejs
+autocmd FileType javascript setlocal expandtab shiftwidth=2 softtabstop=2          " js
+autocmd FileType html       setlocal expandtab shiftwidth=2 softtabstop=2          " vim
+
+"autocmd BufNewFile,BufRead *.vue set ft=vue
 
 " Invisible chars
 set showbreak=↪
-set listchars=eol:.,tab:+-,trail:~
+set listchars=tab:+-,trail:~
 set list
 
 " When editing a file, always jump to the last known cursor position.
@@ -104,7 +111,12 @@ autocmd BufReadPost *
   \ endif
 
 " FZF ignores files in gitignore
-"let $FZF_DEFAULT_COMMAND="git ls-tree -r --name-only HEAD || $FZF_INITIAL_COMMAND"
+"set rtp+=/Users/curquiza/.brew/opt/fzf
+let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude .git' " fd binary needs to be installed
+" Hide status line
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " YCM
 " always load config file
@@ -113,35 +125,32 @@ autocmd BufReadPost *
 "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " TabNine
-set rtp+=~/tabnine-vim
+"set rtp+=~/tabnine-vim
 
 " ALE
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
-"let g:ale_completion_enabled = 1
-let g:ale_sign_column_always = 1
-let g:ale_c_parse_makefile = 1
+let g:ale_lint_on_save = 1        " run linter only on save
+let g:ale_sign_column_always = 1  " always display gutter
+let g:ale_c_parse_makefile = 1    " use makefile
+
+" NERDTree
+let NERDTreeShowHidden=1        " Show hidden files
+let NERDTreeIgnore=['\.swp$']   " Ignore these files
+
+" Vuejs highlight
+autocmd FileType vue syntax sync fromstart  " avoid syntax highlight to stop randmonly
+let g:vue_disable_pre_processors=1          " avoid slow down
 
 " ---- MAPPING -----------------------------------------------------------------
 
 inoremap ret; return<space>();<left><left>
-inoremap /** /*<esc>o<esc>i**<return>*/<return><up><up><right><right><space>
 inoremap (( ()<left>
 inoremap ((; ();<left><left>
 inoremap [[ []<left>
 inoremap "" ""<left>
 inoremap '' ''<left>
-inoremap {{ {<return>}<up><return>
-
-" Select the current word
-"nnoremap <space> viw
-" Delete the current word and pass in insert mode
-nnoremap <space><space> ciw
-" Current word in uppercase
-"noremap <c-u> viwU
-" Move the line up and down
-"nnoremap - dd<up><up>p
-"nnoremap + ddp
+inoremap {{ {}<left>
+inoremap <leader>{{ {}<left><return><up><esc>o
+autocmd FileType c inoremap /** /*<esc>o<esc>i**<return>*/<return><up><up><right><right><space>
 
 " Easy escape
 inoremap jj <esc>
@@ -165,7 +174,6 @@ nnoremap <silent> <C-H> :nohlsearch <CR>
 " FuzzyFinder
 nnoremap <leader>FF :FZF<space>
 nnoremap <leader>ff :FZF<CR>
-nnoremap <leader>fd :FZF ~/Documents<CR>
 
 " Move between buffers
 nnoremap <C-J> :bprev<CR>

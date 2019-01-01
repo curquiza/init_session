@@ -11,7 +11,8 @@ TRACE_FILE=trace.txt
 
 FISH_CONFIG=$HOME/.config/fish/config.fish
 ZSH_CONFIG=$HOME/.zshrc
-GIT_CONFIG=$HOME/.gitconfig
+
+NVIM_CONFIG_PATH=$HOME/.config/nvim
 
 function put_title() { printf "%-40s" "$1"; }
 function put_subtitle() { printf "%5s%-35s" "> " "$1"; }
@@ -26,8 +27,8 @@ rm -f $TRACE_FILE
 
 ## creating folders
 echo 'Usefull folders :'
-put_subtitle 'Creating ~/Documents' &&  mkdir -p $HOME/Documents/ && put_done
-put_subtitle 'Creating ~/.config' && mkdir -p $HOME/.config && put_done
+put_subtitle 'Creating ~/Documents' &&  mkdir -p "$HOME/Documents" && put_done
+put_subtitle 'Creating ~/.config' && mkdir -p "$HOME/.config" && put_done
 
 ## installing oh-my-zsh
 echo "Zsh :"
@@ -37,26 +38,33 @@ put_done
 
 ## configuring zsh
 put_subtitle 'Configuring'
-echo "\n# Aliases :" >> $ZSH_CONFIG
-cat $ALIAS_FILE >> $ZSH_CONFIG
-echo "\n# Env var :" >> $ZSH_CONFIG
-cat $ENV_VAR_FILE >> $ZSH_CONFIG
+echo "\n# Aliases :" >> "$ZSH_CONFIG"
+cat "$ALIAS_FILE" >> "$ZSH_CONFIG"
+echo "\n# Env var :" >> "$ZSH_CONFIG"
+cat "$ENV_VAR_FILE" >> "$ZSH_CONFIG"
 put_done
 
-## vim
-put_title 'Configuring vim'
-quiet_cmd "curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-cp $CONFIG_DIR/.vimrc $HOME
-put_done
+## nvim
+put_title 'Configuring neovim'
+put_subtitle 'Installing neovim' \
+    && quiet_cmd "brew install neovim" \
+    && put_done
+put_subtitle 'Installing vim-plug' \
+    && quiet_cmd "curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
+    && put_done
+put_subtitle 'Settings file' \
+    && mkdir -p "$NVIM_CONFIG_PATH" \
+    && cp "$CONFIG_DIR/init.vim" "$NVIM_CONFIG_PATH" \
+    && put_done
 
 ## git
-put_title 'Configuring git'
-cp $CONFIG_DIR/.gitconfig $HOME
-put_done
+put_title 'Configuring git' \
+    && cp "$CONFIG_DIR/.gitconfig" "$HOME" \
+    && put_done
 
 ## brew
+put_title "Brew :"
 # install
-echo "Brew :"
 put_subtitle 'Installing'
 rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew >> trace.txt 2>&1
 echo "\n# Brew env var :\nexport PATH=$HOME/.brew/bin:$PATH" >> $ZSH_CONFIG
@@ -64,34 +72,35 @@ mkdir -p $HOME/.config/fish && echo "\n# Brew env var :\nset PATH $HOME/.brew/bi
 quiet_cmd "source $ZSH_CONFIG"
 put_done
 # update
-put_subtitle 'Updating' && quiet_cmd 'brew update' && put_done
+put_subtitle 'Updating' && quiet_cmd 'brew update -y' && put_done
 
 ## installing packages
 echo "Installing other packages :"
-put_subtitle 'docker-machine' ; quiet_cmd 'brew install docker-machine' ; put_done
-put_subtitle 'docker' ; quiet_cmd 'brew install docker' ; put_done
-put_subtitle 'htop' ; quiet_cmd 'brew install htop' ; put_done
+put_subtitle 'docker-machine' && quiet_cmd 'brew install docker-machine' && put_done
+put_subtitle 'docker' && quiet_cmd 'brew install docker' && put_done
+put_subtitle 'htop' && quiet_cmd 'brew install htop' && put_done
+put_subtitle 'fd' && quiet_cmd 'brew install htop' && put_done
 
+## Fish shell
 ## installing fish shell
 echo "Fish shell :"
 put_subtitle 'Installing' && quiet_cmd 'brew install fish' && put_done
-
 ## configuring fish shell
 put_subtitle 'Configuring'
-mkdir -p $HOME/.config/fish
-mkdir -p $HOME/.config/fish/functions
+mkdir -p "$HOME/.config/fish"
+mkdir -p "$HOME/.config/fish/functions"
 # custom prompt functions
-cp $CONFIG_DIR/functions/fish_prompt.fish $HOME/.config/fish/functions
-cp $CONFIG_DIR/functions/fish_right_prompt.fish $HOME/.config/fish/functions
+cp "$CONFIG_DIR/functions/fish_prompt.fish" "$HOME/.config/fish/functions"
+cp "$CONFIG_DIR/functions/fish_right_prompt.fish" "$HOME/.config/fish/functions"
 # aliases
-echo "\n# Aliases :" >> $FISH_CONFIG
-cat $ALIAS_FILE >> $FISH_CONFIG
-sed -i -e 's/=/ /g' $FISH_CONFIG
+echo "\n# Aliases :" >> "$FISH_CONFIG"
+cat $ALIAS_FILE >> "$FISH_CONFIG"
+sed -i -e 's/=/ /g' "$FISH_CONFIG"
 # env var
-echo "\n# Env var :" >> $FISH_CONFIG
-cat $ENV_VAR_FILE >> $FISH_CONFIG
-sed -i -e 's/=/ /g' $FISH_CONFIG
-sed -i -e 's/export/set -x/g' $FISH_CONFIG
+echo "\n# Env var :" >> "$FISH_CONFIG"
+cat $ENV_VAR_FILE >> "$FISH_CONFIG"
+sed -i -e 's/=/ /g' "$FISH_CONFIG"
+sed -i -e 's/export/set -x/g' "$FISH_CONFIG"
 # clean
 rm -f "$FISH_CONFIG""-e"
-put_done
+p
