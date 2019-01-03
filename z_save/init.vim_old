@@ -128,9 +128,11 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 "set rtp+=~/tabnine-vim
 
 " ALE
-let g:ale_lint_on_save = 1        " run linter only on save
 let g:ale_sign_column_always = 1  " always display gutter
 let g:ale_c_parse_makefile = 1    " use makefile
+" run linter only on save
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
 
 " NERDTree
 let NERDTreeShowHidden=1        " Show hidden files
