@@ -6,6 +6,7 @@
 
 call plug#begin('~/.vim/plugged')
 
+
 " NERDTree
 Plug 'scrooloose/nerdtree'
 
@@ -25,11 +26,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Easy comment (and manage multiple filetype in one file like Vue files)
-"Plug 'scrooloose/nerdcommenter'
 Plug 'tomtom/tcomment_vim'
-
-" Multiple cursor (/!\ not stable)
-"Plug 'terryma/vim-multiple-cursors'
 
 " Buffers
 Plug 'ap/vim-buftabline'
@@ -38,13 +35,16 @@ Plug 'corntrace/bufexplorer'
 " HTML tag matching
 Plug 'gregsexton/MatchTag'
 
-" Easy surround
-"Plug 'tpope/vim-surround'
-
 " ALE : Asynchronous Lint Engine
 Plug 'w0rp/ale'
 
-" Initialize plugin system
+" Editorconfig
+Plug 'editorconfig/editorconfig-vim'
+
+" Underscore and camelcase words
+Plug 'chaoren/vim-wordmotion'
+
+
 call plug#end()
 
 
@@ -112,8 +112,8 @@ inoremap <leader>{{ {}<left><return><up><esc>o
 autocmd FileType c inoremap /** /*<esc>o<esc>i**<return>*/<return><up><up><right><right><space>
 
 " Insert newline in normal mode
-nnoremap <leader>o o<esc>
-nnoremap <leader>O O<esc>
+nnoremap <leader>o o<esc><up>
+nnoremap <leader>O O<esc><down>
 
 " Map switching of window with shift + arrow
 nnoremap <silent> <S-Up> <c-w><up>
@@ -126,21 +126,27 @@ nnoremap <silent> <S-Right> <c-w><right>
 inoremap <C-U> <C-G>u<C-U>
 
 " Switch off highlight searching
-nnoremap <silent> <C-H> :nohlsearch <CR>
+nnoremap <C-H> :nohlsearch <CR>
 
 " Move between buffers
 nnoremap <C-J> :bprev<CR>
 nnoremap <C-K> :bnext<CR>
 
 " Resize window
-nnoremap ˘ <C-w>> "Alt + >
-nnoremap ¯ <C-w>< "Alt + <
+"Alt + >
+nnoremap ˘ :vertical resize +1 <CR>
+"Alt + <
+nnoremap ¯ :vertical resize -1 <CR>
+"Alt + +
+nnoremap ± :resize +1 <CR>
+"Alt + -
+nnoremap – :resize -1 <CR>
 
 " Copy and paste from clipboard
 " Alt + c
 vnoremap ç "*y
 " Alt + v
-noremap √ "*p
+nnoremap √ "*p
 
 
 " ------------------------------------------------------------------------------
@@ -203,10 +209,10 @@ endif
 
 let g:lightline = { 'colorscheme': 'palenight' }
 
+
 " == T Comment =================================================================
 
 nnoremap <space><space> :: :TComment<CR>
-vnoremap <space><space> :: :TComment<CR>
 " to comment only a part in visual mode : <leader>__
 
 
@@ -216,6 +222,7 @@ nnoremap <leader>bx :BufExplorerHorizontalSplit<CR>
 nnoremap <leader>bv :BufExplorerVerticalSplit<CR>
 nnoremap <leader>bb :BufExplorer<CR>
 
+
 " == BuffTabline ===============================================================
 
 let g:buftabline_separators=1       " separator between buffors
@@ -224,3 +231,24 @@ let g:buftabline_separators=1       " separator between buffors
 hi link BufTabLineActive NONE
 hi link BufTabLineCurrent PmenuSel
 
+
+" == Word Motion ===============================================================
+
+" Use leader
+let g:wordmotion_prefix = '<Leader>'
+
+" Remove a subword in insert mode.
+" Otherwise ci<leader>w will do it in normal mode
+" Doesn't work with inoremaq because uses the Plugin's mappings
+imap <C-w> <esc>v<leader>bc
+
+
+" ------------------------------------------------------------------------------
+" ---- USEFULL SHORTCUTS IN VIM ------------------------------------------------
+" ------------------------------------------------------------------------------
+
+" * + cgn + write word + esc + dot : replace a word everywhere in the file
+" <C-W> in insert mode : delete a word
+" D in normal node : delete from the cursor to the end of the line
+" S in normal mode = 0D
+" gh in normal mode : actives select mode -> like selection in classic editor

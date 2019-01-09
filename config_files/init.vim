@@ -108,6 +108,7 @@ inoremap [[ []<left>
 inoremap "" ""<left>
 inoremap '' ''<left>
 inoremap {{ {}<left>
+inoremap <leader><< <><left>
 inoremap <leader>{{ {}<left><return><up><esc>o
 autocmd FileType c inoremap /** /*<esc>o<esc>i**<return>*/<return><up><up><right><right><space>
 
@@ -177,6 +178,7 @@ let g:ale_c_parse_makefile = 1    " use makefile
 " run linter only on save
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_set_highlights = 0
 
 
 " == FuzzyFinder ===============================================================
@@ -240,7 +242,7 @@ let g:wordmotion_prefix = '<Leader>'
 " Remove a subword in insert mode.
 " Otherwise ci<leader>w will do it in normal mode
 " Doesn't work with inoremaq because uses the Plugin's mappings
-imap <C-w> <esc>v<leader>bc
+imap <leader><C-w> <esc>v<leader>bc
 
 
 " ------------------------------------------------------------------------------
