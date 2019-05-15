@@ -13,3 +13,5 @@
 [user]
 	name = Clementine Urquizar
 	email = clementine.urquizar@gmail.com
+[core]
+	editor = vim
