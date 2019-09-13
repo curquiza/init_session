@@ -2,7 +2,6 @@
 
 Quick way to initialize your session for :
 - git
-- brew
 - neovim with all plugins needed
 - fish shell with a funny prompt ^^
 - other usefull packages (fd, htop, docker)
@@ -21,8 +20,9 @@ cd init_42_session
 ```
 1) Change your user and email in `config_files/.gitconfig`
 2) Add/remove aliases and environnement variables in `config_files/aliases.txt` and in `config_files/env_var.txt`
-3) When you are ready, launch : `sh start_init.sh`
-4) Follow the next steps (NeoVim and Fish shell) to finish installation 
+3) Check if `brew` is installed, otherwise go to: https://brew.sh/index_fr
+4) When you are ready, launch : `sh start_init.sh`
+5) Follow the next steps (NeoVim and Fish shell) to finish installation 
 
 #### Different kind of session
 The script will ask you to choose between a 42 session or a personnal session initialization.  
